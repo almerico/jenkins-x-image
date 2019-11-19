@@ -49,7 +49,7 @@ gitlab-plugin:1.5.13
 handlebars:1.1.1
 handy-uri-templates-2-api:2.1.7-1.0
 htmlpublisher:1.20
-jackson2-api:2.9.10
+jackson2-api:2.10.0
 jenkins-design-language:1.19.0
 jira:3.0.10
 jquery-detached:1.2.1
@@ -57,7 +57,7 @@ jsch:0.1.55.1
 junit:1.28
 jx-resources:1.0.37
 kubernetes-credentials:0.4.1
-kubernetes:1.19.1
+kubernetes:1.21.3
 kubernetes-credentials-provider:0.12.1
 mailer:1.28
 matrix-project:1.14
@@ -80,6 +80,7 @@ pubsub-light:1.13
 resource-disposer:0.13
 scm-api:2.6.3
 script-security:1.64
+slack:2.34
 sse-gateway:1.20
 ssh-credentials:1.17.3
 structs:1.20
