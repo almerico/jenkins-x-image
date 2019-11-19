@@ -28,6 +28,7 @@ pipeline {
 
             sh "jx step git credentials"
             sh "echo \$(jx-release-version) > VERSION"
+            sh 'export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml'
             sh "make tag"
           }
         }
