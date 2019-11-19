@@ -28,13 +28,7 @@ pipeline {
 
             sh "jx step git credentials"
             sh "echo \$(jx-release-version) > VERSION"
-            sh "git add --all"
-            sh "git commit -m "release \$(APP_VERSION)" --allow-empty"
-            sh "git tag -fa v$(APP_VERSION) -m "Release version \$(APP_VERSION)"
-            sh "git push origin v$(APP_VERSION)"
-
-            sh 'export VERSION=`cat VERSION` && skaffold build -f skaffold.yaml'
-            sh "jx step post build --image $DOCKER_REGISTRY/$ORG/$APP_NAME:\$(cat VERSION)"
+            sh "make tag"
           }
         }
           }
