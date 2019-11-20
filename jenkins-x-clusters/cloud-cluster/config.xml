@@ -1,7 +1,7 @@
 <?xml version='1.1' encoding='UTF-8'?>
 <hudson>
   <disabledAdministrativeMonitors/>
-  <version>2.150.1</version>
+  <version>2.190.2</version>
   <installStateName>RUNNING</installStateName>
   <numExecutors>0</numExecutors>
   <mode>NORMAL</mode>
@@ -19,7 +19,7 @@
   <viewsTabBar class="hudson.views.DefaultViewsTabBar"/>
   <myViewsTabBar class="hudson.views.DefaultMyViewsTabBar"/>
   <clouds>
-    <org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud plugin="kubernetes@1.13.7">
+    <org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud plugin="kubernetes@1.21.3">
       <name>kubernetes</name>
       <defaultsProviderTemplate></defaultsProviderTemplate>
       <templates>
@@ -38,7 +38,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -50,6 +50,7 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -58,7 +59,7 @@
               <image>jenkinsxio/builder-dlang:0.1.235</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -82,7 +83,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -135,7 +136,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -153,7 +155,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -165,6 +167,7 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -173,7 +176,7 @@
               <image>jenkinsxio/builder-go:0.1.235</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -197,7 +200,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -250,7 +253,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -268,7 +272,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -280,10 +284,12 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.gnupg</mountPath>
               <secretName>jenkins-release-gpg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -292,7 +298,7 @@
               <image>jenkinsxio/builder-gradle:0.1.235</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -316,7 +322,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -373,7 +379,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -391,7 +398,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -403,6 +410,7 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -411,7 +419,7 @@
               <image>jenkinsxio/builder-base:0.1.235</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -435,7 +443,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -488,7 +496,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -506,7 +515,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -514,14 +523,17 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/root/.m2/</mountPath>
               <secretName>jenkins-maven-settings</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.gnupg</mountPath>
               <secretName>jenkins-release-gpg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
             <org.csanchez.jenkins.plugins.kubernetes.volumes.EmptyDirVolume>
               <mountPath>/var/lib/docker</mountPath>
@@ -534,7 +546,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -558,7 +570,7 @@
               <image>gcr.io/jenkinsxio/builder-maven-java11:0.1.325</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -582,7 +594,7 @@
               <image>docker:18.06.1-dind</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>--registry-mirror=https://mirror.gcr.io</args>
               <ttyEnabled>true</ttyEnabled>
@@ -639,7 +651,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -657,7 +670,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -669,14 +682,17 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/root/.m2/</mountPath>
               <secretName>jenkins-maven-settings</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.gnupg</mountPath>
               <secretName>jenkins-release-gpg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -685,7 +701,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -709,7 +725,7 @@
               <image>gcr.io/jenkinsxio/builder-maven-java11:0.1.325</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -767,15 +783,12 @@
               <key>_JAVA_OPTIONS</key>
               <value>-XX:+UnlockExperimentalVMOptions -Dsun.zip.disableMemoryMapping=true -XX:+UseParallelGC -XX:MinHeapFreeRatio=5 -XX:MaxHeapFreeRatio=10 -XX:GCTimeRatio=4 -XX:AdaptiveSizePolicyWeight=90 -Xms1024m -Xmx1636m</value>
             </org.csanchez.jenkins.plugins.kubernetes.ContainerEnvVar>
-            <org.csanchez.jenkins.plugins.kubernetes.model.KeyValueEnvVar>
-              <key>GITLAB_TOKEN</key>
-              <value>xb37XFdeqNVGEmYiF9Qs</value>
-            </org.csanchez.jenkins.plugins.kubernetes.model.KeyValueEnvVar>
           </envVars>
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -793,7 +806,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -805,14 +818,17 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/root/.m2/</mountPath>
               <secretName>jenkins-maven-settings</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.gnupg</mountPath>
               <secretName>jenkins-release-gpg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -821,7 +837,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -845,7 +861,7 @@
               <image>jenkinsxio/builder-maven-nodejs:0.1.235</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -902,7 +918,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -920,7 +937,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -932,6 +949,7 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -940,7 +958,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -964,7 +982,7 @@
               <image>jenkinsxio/builder-newman:0.1.235</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -1017,7 +1035,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -1035,7 +1054,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -1047,6 +1066,7 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -1055,7 +1075,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -1079,7 +1099,7 @@
               <image>jenkinsxio/builder-nodejs:0.1.235</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -1132,7 +1152,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -1150,7 +1171,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -1162,6 +1183,7 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -1170,7 +1192,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -1194,7 +1216,7 @@
               <image>jenkinsxio/builder-base:0.1.235</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -1247,7 +1269,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -1265,7 +1288,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -1277,6 +1300,7 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -1285,7 +1309,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -1309,7 +1333,7 @@
               <image>jenkinsxio/builder-python:0.1.235</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -1362,7 +1386,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -1380,7 +1405,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -1392,6 +1417,7 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -1400,7 +1426,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -1424,7 +1450,7 @@
               <image>jenkinsxio/builder-python2:0.1.235</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -1477,7 +1503,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -1495,7 +1522,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -1507,6 +1534,7 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -1515,7 +1543,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -1539,7 +1567,7 @@
               <image>jenkinsxio/builder-python37:0.1.235</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -1592,7 +1620,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -1610,7 +1639,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -1622,6 +1651,7 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -1630,7 +1660,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -1654,7 +1684,7 @@
               <image>jenkinsxio/builder-ruby:0.1.235</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -1707,7 +1737,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -1725,7 +1756,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -1737,6 +1768,7 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -1745,7 +1777,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -1769,7 +1801,7 @@
               <image>jenkinsxio/builder-rust:0.1.235</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -1822,7 +1854,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -1840,7 +1873,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -1852,14 +1885,17 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/root/.m2/</mountPath>
               <secretName>jenkins-maven-settings</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.gnupg</mountPath>
               <secretName>jenkins-release-gpg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -1868,7 +1904,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -1892,7 +1928,7 @@
               <image>jenkinsxio/builder-scala:0.1.235</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -1949,7 +1985,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -1967,7 +2004,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -1979,6 +2016,7 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -1987,7 +2025,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -2011,7 +2049,7 @@
               <image>jenkinsxio/builder-serverless:0.0.3</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -2064,7 +2102,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -2082,7 +2121,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -2094,6 +2133,7 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -2102,7 +2142,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -2126,7 +2166,7 @@
               <image>jenkinsxio/builder-swift:0.1.235</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -2179,7 +2219,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -2197,7 +2238,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -2209,6 +2250,7 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -2217,7 +2259,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -2241,7 +2283,7 @@
               <image>jenkinsxio/builder-terraform:0.1.235</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -2294,7 +2336,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
         <org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
@@ -2312,7 +2355,7 @@
           <serviceAccount>jenkins</serviceAccount>
           <nodeSelector></nodeSelector>
           <nodeUsageMode>NORMAL</nodeUsageMode>
-          <customWorkspaceVolumeEnabled>false</customWorkspaceVolumeEnabled>
+          <hostNetwork>false</hostNetwork>
           <workspaceVolume class="org.csanchez.jenkins.plugins.kubernetes.volumes.workspace.EmptyDirWorkspaceVolume">
             <memory>false</memory>
           </workspaceVolume>
@@ -2324,14 +2367,17 @@
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/root/.m2/</mountPath>
               <secretName>jenkins-maven-settings</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.docker</mountPath>
               <secretName>jenkins-docker-cfg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
             <org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
               <mountPath>/home/jenkins/.gnupg</mountPath>
               <secretName>jenkins-release-gpg</secretName>
+              <defaultMode></defaultMode>
             </org.csanchez.jenkins.plugins.kubernetes.volumes.SecretVolume>
           </volumes>
           <containers>
@@ -2340,7 +2386,7 @@
               <image>jenkinsci/jnlp-slave:3.26-1-alpine</image>
               <privileged>false</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command></command>
               <args>${computer.jnlpmac} ${computer.name}</args>
               <ttyEnabled>false</ttyEnabled>
@@ -2364,7 +2410,7 @@
               <image>jenkinsxio/builder-aws-cdk:0.1.235</image>
               <privileged>true</privileged>
               <alwaysPullImage>false</alwaysPullImage>
-              <workingDir>/home/jenkins</workingDir>
+              <workingDir>/home/jenkins/agent</workingDir>
               <command>/bin/sh -c</command>
               <args>cat</args>
               <ttyEnabled>true</ttyEnabled>
@@ -2421,7 +2467,8 @@
           <annotations/>
           <imagePullSecrets/>
           <nodeProperties/>
-          <yaml></yaml>
+          <yamlMergeStrategy class="org.csanchez.jenkins.plugins.kubernetes.pod.yaml.Overrides"/>
+          <showRawYaml>true</showRawYaml>
           <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Default"/>
         </org.csanchez.jenkins.plugins.kubernetes.PodTemplate>
       </templates>
@@ -2430,14 +2477,22 @@
       <addMasterProxyEnvVars>false</addMasterProxyEnvVars>
       <capOnlyOnAlivePods>false</capOnlyOnAlivePods>
       <namespace>jx</namespace>
+      <directConnection>false</directConnection>
       <jenkinsUrl>http://jenkins:8080</jenkinsUrl>
       <jenkinsTunnel>jenkins-agent:50000</jenkinsTunnel>
       <containerCap>0</containerCap>
       <retentionTimeout>5</retentionTimeout>
       <connectTimeout>0</connectTimeout>
       <readTimeout>0</readTimeout>
+      <podLabels>
+        <org.csanchez.jenkins.plugins.kubernetes.PodLabel>
+          <key>jenkins</key>
+          <value>slave</value>
+        </org.csanchez.jenkins.plugins.kubernetes.PodLabel>
+      </podLabels>
       <usageRestricted>false</usageRestricted>
       <maxRequestsPerHost>32</maxRequestsPerHost>
+      <waitForPodSec>600</waitForPodSec>
       <podRetention class="org.csanchez.jenkins.plugins.kubernetes.pod.retention.Never"/>
     </org.csanchez.jenkins.plugins.kubernetes.KubernetesCloud>
   </clouds>
