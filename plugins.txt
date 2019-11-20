@@ -99,7 +99,7 @@ workflow-multibranch:2.21
 workflow-scm-step:2.9
 workflow-step-api:2.20
 workflow-support:3.3
-ws-cleanup:0.37
+ws-cleanup:0.35
 maven-plugin:3.4
 gradle:1.34
 ivy:2.1
