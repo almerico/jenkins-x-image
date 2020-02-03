@@ -14,3 +14,4 @@ COPY init-docker-registry-env.groovy /usr/share/jenkins/ref/init.groovy.d/init-d
 RUN /usr/local/bin/install-plugins.sh < /usr/share/jenkins/ref/plugins.txt
 #COPY plugins/*.jpi /usr/share/jenkins/ref/plugins/
 ENV JAVA_OPTS "$JAVA_OPTS -Dhudson.security.csrf.DefaultCrumbIssuer.EXCLUDE_SESSION_ID=true"
+
