@@ -50,3 +50,4 @@ spec:
     - mountPath: /home/jenkins/.docker
       name: jenkins-docker-cfg-volume
       readOnly: true
+      
