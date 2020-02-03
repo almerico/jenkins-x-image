@@ -1,5 +1,6 @@
 pipeline {
     agent {
+        
         kubernetes {
               // Change the name of jenkins-maven label to be able to use yaml configuration snippet
               label "maven-dind"
