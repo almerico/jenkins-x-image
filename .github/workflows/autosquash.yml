@@ -1,6 +1,5 @@
 name: Autosquash
-on:[ pull_request ]
-
+on: [pull_request]
 jobs:
   autosquash:
     name: Autosquash
