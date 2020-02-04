@@ -1,5 +1,5 @@
 name: Merge in comment
-on: [pull_request]
+on: [push]
 jobs:
   build:
     name: comment merge 
