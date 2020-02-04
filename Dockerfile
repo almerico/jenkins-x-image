@@ -4,6 +4,7 @@ USER root
 RUN apt-get update && apt-get install -y vim
 USER jenkins
 
+
 # Disable plugin banner on startup
 RUN echo 2.0 > /usr/share/jenkins/ref/jenkins.install.UpgradeWizard.state
 
