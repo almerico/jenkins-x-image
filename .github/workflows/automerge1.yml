@@ -25,4 +25,11 @@ jobs:
         uses: "pascalgn/automerge-action@7854d3bd607dccdaf0b2c134b699a812c8960213"
         env:
           GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          MERGE_LABELS: "updatebot,automerge,!wip,!work in progress,!do-not-merge"  
+          MERGE_LABELS: "automerge,updatebot,!wip,!work in progress,!do-not-merge"
+          MERGE_METHOD: "squash"
+          MERGE_COMMIT_MESSAGE: "pull-request-description"
+          MERGE_FORKS: "false"
+          MERGE_RETRIES: "6"
+          MERGE_RETRY_SLEEP: "10000"
+          UPDATE_LABELS: ""
+          UPDATE_METHOD: "rebase"  
