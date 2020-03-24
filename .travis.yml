@@ -12,12 +12,13 @@ branches:
 # Enable integration tests
 before_script: 
   - curl -L https://github.com/jenkins-x/jx/releases/download/v2.0.1252/jx-linux-amd64.tar.gz | tar xzv 
+  - sudo chmod o+w .
   - sudo mv jx /usr/local/bin
 
 
 script:
   - echo "Test"
-  - jx step
+  - jx step tag
   
 
     
