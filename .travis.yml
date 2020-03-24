@@ -10,13 +10,15 @@ branches:
 
 
 # Enable integration tests
-before_script: 
-  - echo $(bin/jx-release-version) > VERSION
+before_script:
+  - sudo cp bin/jx-release-version /usr/bin/jx-release-version
+  - sudo cp bin/updatebot /usr/bin/updatebot
+  - echo $(jx-release-version) > VERSION
 
 
 script:
   - echo "Test"
-  -  make bin/updatebot/push-version 
+  -  make updatebot/push-version 
   
 
     
