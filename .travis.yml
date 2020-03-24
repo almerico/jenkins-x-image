@@ -21,16 +21,14 @@ before_script:
 
 # Enable integration tests
 script:
-  - mvn verify -B
-  - git checkout develop
+  - mvn clean install
   - mvn versions:set -DnewVersion=\$(cat VERSION)"
-  - mvn clean verify -B'
   - git add --all"
   - git commit -m "Release $(cat VERSION)" --allow-empty"
   - git tag -fa v$(cat VERSION) -m "Release version $(cat VERSION)"
   - git push origin v$(cat VERSION)"
 
-  - mvn clean deploy -DskipTests'
+  - mvn clean deploy -DskipTests
 
   - export VERSION=`cat VERSION`
 after_success:
