@@ -1,5 +1,5 @@
 language: java
-
+sudo: required
 jdk:
   - openjdk11
 
@@ -11,7 +11,8 @@ branches:
 
 # Enable integration tests
 before_script: 
-  - curl -L https://github.com/jenkins-x/jx/releases/download/v2.0.1252/jx-linux-amd64.tar.gz | tar xzv 
+  - curl -L https://github.com/jenkins-x/jx/releases/download/v2.0.1252/jx-linux-amd64.tar.gz 
+  - tar -xzf  jx-linux-amd64.tar.gz 
   - sudo chmod o+w .
   - sudo mv jx /usr/local/bin
 
