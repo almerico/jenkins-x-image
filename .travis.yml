@@ -22,7 +22,8 @@ before_script:
 # Enable integration tests
 script:
   - mvn clean install
-  - mvn versions:set -DnewVersion=\$(cat VERSION)"
+  - mvn versions:set -DnewVersion=$(cat VERSION)"
+  - mvn clean 
   - git add --all"
   - git commit -m "Release $(cat VERSION)" --allow-empty"
   - git tag -fa v$(cat VERSION) -m "Release version $(cat VERSION)"
@@ -30,6 +31,6 @@ script:
 
   - mvn clean deploy -DskipTests
 
-  - export VERSION=`cat VERSION`
+  
 after_success:
-  - make updatebot/push-version 
+  - export VERSION=`cat VERSION`|make updatebot/push-version 
